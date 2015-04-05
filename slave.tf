@@ -14,6 +14,7 @@ module "s_ami" {
 
 resource "aws_instance" "mesos_slave" {
     iam_instance_profile = "${var.discovery_instance_profile}"
+    allocate_public_ip_address = false
     count = "${var.slaves}"
     ami = "${module.s_ami.ami_id}"
     instance_type = "${var.slave_instance_type}"
