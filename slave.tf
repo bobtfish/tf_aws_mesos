@@ -39,8 +39,6 @@ resource "aws_instance" "mesos_slave" {
       scripts = [
         "${path.module}/scripts/wait_for_cloudinit.sh",
         "${path.module}/scripts/haproxy_marathon_bridge_install.sh",
-        "${path.module}/scripts/common_config.sh",
-        "${path.module}/scripts/slave_config.sh"
       ]
     }
 }
