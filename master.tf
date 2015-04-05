@@ -30,7 +30,7 @@ resource "aws_instance" "mesos_master" {
       key_file = "${var.ssh_private_key_file}"
     }
  
-    user_data = "${file(\"master.conf\")}"
+    user_data = "${file(\"${path.module}/master.conf\")}"
 
     # install mesos, haproxy, docker, openvpn, and configure the node
     provisioner "remote-exec" {
