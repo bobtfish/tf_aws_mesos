@@ -13,6 +13,7 @@ module "s_ami" {
 }
 
 resource "aws_instance" "mesos_slave" {
+    associate_public_ip_address = true
     count = "${var.slaves}"
     ami = "${module.s_ami.ami_id}"
     instance_type = "${var.slave_instance_type}"

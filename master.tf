@@ -13,6 +13,7 @@ module "m_ami" {
 }
 
 resource "aws_instance" "mesos_master" {
+    associate_public_ip_address = true
     count = "${var.masters}"
     ami = "${module.m_ami.ami_id}"
     instance_type = "${var.master_instance_type}"
