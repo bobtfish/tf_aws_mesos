@@ -1,11 +1,13 @@
 #!/bin/bash
 
 echo "getting metadata"
-MASTERCOUNT=`curl -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/attributes/mastercount"`
-CLUSTERNAME=`curl -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/attributes/clustername"`
-MYID=`curl -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/attributes/myid"`
-# until terraform supports math functions, we need to do this here
-((MYID+=1))
+MASTERS=""
+
+while "$(echo $MASTERS | wc -l)" -lt 3; do
+  MASTERS=$(/usr/local/bin/aws ec2 describe-instances --region eu-central-1 --filters "Name=tag-key,Values=role" "Name=tag-value,Values=mesos-master" --query 'Reservations[].Instances[].[PrivateIpAddress][]' --output text | sed -e 's/\s/\n/g')
+done
+
+echo "MASTERS $MASTERS"
 
 #### ZOOKEEPER stuff
 
@@ -16,10 +18,6 @@ do
   echo "adding server ${i}"
   sudo sh -c "echo server.${i}=${CLUSTERNAME}-mesos-master-$((${i}-1)):2888:3888 >> /etc/zookeeper/conf/zoo.cfg"
 done
-
-# set myid
-echo "setting myid"
-sudo sh -c "echo ${MYID} > /etc/zookeeper/conf/myid"
 
 ### MESOS stuff
 
