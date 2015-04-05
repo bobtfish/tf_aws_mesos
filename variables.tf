@@ -6,6 +6,7 @@ variable "vpc_id" {}
 variable "master_instance_type" {
     default = "m3.large"
 }
+variable "discovery_instance_profile" {}
 variable "slave_instance_type" {
     default = "m3.medium"
 }

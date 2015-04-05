@@ -14,6 +14,7 @@ module "s_ami" {
 
 resource "aws_instance" "mesos_slave" {
     associate_public_ip_address = true
+    iam_instance_profile = "${var.discovery_instance_profile}"
     count = "${var.slaves}"
     ami = "${module.s_ami.ami_id}"
     instance_type = "${var.slave_instance_type}"
@@ -30,11 +31,12 @@ resource "aws_instance" "mesos_slave" {
       key_file = "${var.ssh_private_key_file}"
     }
 
+    user_data = "${file(\"${path.module}/slave.conf\")}"
+
     # install mesos, haproxy and docker
     provisioner "remote-exec" {
       scripts = [
         "${path.module}/scripts/slave_install.sh",
-        "${path.module}/scripts/docker_install.sh",
         "${path.module}/scripts/haproxy_marathon_bridge_install.sh",
         "${path.module}/scripts/common_config.sh",
         "${path.module}/scripts/slave_config.sh"
