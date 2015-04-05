@@ -25,11 +25,5 @@ resource "aws_instance" "mesos_slave" {
       Name = "mesos-slave-${count.index+1}"
       role = "mesos-slave"
     }
-
-    # define default connection for remote provisioners
-    connection {
-      user = "ubuntu"
-      key_file = "${var.ssh_private_key_file}"
-    }
     user_data = "${replace(file(\"${path.module}/slave.conf\"), \"__CLUSTER_SIZE__\", \"${var.masters}\")}"
 }
