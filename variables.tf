@@ -1,4 +1,5 @@
 ## credential stuff
+variable "domain" {}
 variable "admin_key_name" {}
 variable "ssh_private_key_file" {}
 variable "region" {}

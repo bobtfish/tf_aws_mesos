@@ -25,6 +25,6 @@ resource "aws_instance" "mesos_master" {
       Name = "mesos-master-${count.index+1}"
       role = "mesos-master"
     }
-    user_data = "${replace(replace(file(\"${path.module}/master.conf\"), \"__MYID__\", \"${count.index+1}\"), \"__CLUSTER_SIZE__\", \"${var.masters}\")}"
+    user_data = "${replace(replace(file(\"${path.module}/master.conf\"), \"__CLUSTER_SIZE__\", \"${var.masters}\"), \"__DOMAIN__\", \"${var.domain}\")}"
 }
 
