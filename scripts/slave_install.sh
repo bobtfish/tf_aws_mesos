@@ -12,4 +12,4 @@ echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | \
 sudo apt-get -y update
 
 #Install mesos
-sudo apt-get -y install mesos haproxy
+sudo apt-get -y install mesos haproxy jq

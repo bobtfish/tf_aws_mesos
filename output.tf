@@ -1,3 +1,4 @@
-#output "address" {
-#  value = "${google_compute_instance.mesos-master.network_interface.0.address}"
-#}
+output "address" {
+  value = "${aws_instance.mesos_master.0.private_ip}"
+}
+
