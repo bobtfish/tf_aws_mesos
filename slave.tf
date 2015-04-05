@@ -13,12 +13,11 @@ module "s_ami" {
 }
 
 resource "aws_instance" "mesos_slave" {
-    associate_public_ip_address = true
     iam_instance_profile = "${var.discovery_instance_profile}"
     count = "${var.slaves}"
     ami = "${module.s_ami.ami_id}"
     instance_type = "${var.slave_instance_type}"
-    security_groups = [ "${aws_security_group.mesos_http.id}", "${aws_security_group.mesos_https.id}", "${aws_security_group.mesos_ssh.id}", "${aws_security_group.mesos_internal.id}" ]
+    security_groups = [ "${aws_security_group.mesos_ssh.id}", "${aws_security_group.mesos_internal.id}" ]
     subnet_id = "${var.subnet_id}"
     key_name = "${var.admin_key_name}"
     tags {
