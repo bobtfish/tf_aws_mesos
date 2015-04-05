@@ -6,14 +6,7 @@ resource "aws_security_group" "mesos_internal" {
       from_port = 0
       to_port = 65535
       protocol = "-1"
-#      security_groups = [ "${self.id}" ]
-  }
-
-  egress {
-      from_port = 0
-      to_port = 65535
-      protocol = "-1"
-#      security_groups = [ "${self.id}" ]
+      self        = true
   }
 
   tags {
