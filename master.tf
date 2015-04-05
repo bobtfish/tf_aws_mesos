@@ -1,35 +1,17 @@
-resource "google_compute_instance" "mesos-master" {
+resource "aws_instance" "mesos_master" {
     count = "${var.masters}"
-    name = "${var.name}-mesos-master-${count.index}"
-    machine_type = "${var.master_machine_type}"
-    zone = "${var.zone}"
-    tags = ["mesos-master","http","https","ssh","vpn"]
-    
-    disk {
-      image = "${var.image}"
-      type = "pd-ssd"
-    }
-
-    # declare metadata for configuration of the node
-    metadata {
-      mastercount = "${var.masters}"
-      clustername = "${var.name}"
-      myid = "${count.index}"
-      domain = "${var.domain}"
-    }
-    
-    # network interface
-    network_interface {
-      network = "${google_compute_network.mesos-net.name}"
-      access_config {
-        // ephemeral address
-      }
+    ami = "ami-1234"
+    instance_type = "${var.master_instance_type}"
+    security_groups = [ "${aws_security_group.mesos_http.id}", "${aws_security_group.mesos_https.id}", "${aws_security_group.mesos_ssh.id}", "${aws_security_group.mesos_vpn.id}", "${aws_security_group.mesos_internal.id}" ]
+    subnet_id = "${var.subnet_id}"
+    tags {
+      Name = "mesos-master-${count.index}"
     }
     
     # define default connection for remote provisioners
     connection {
-      user = "${var.gce_ssh_user}"
-      key_file = "${var.gce_ssh_private_key_file}"
+      user = "${var.ssh_user}"
+      key_file = "${var.ssh_private_key_file}"
     }
     
     # install mesos, haproxy, docker, openvpn, and configure the node

@@ -1,21 +1,8 @@
-# Container Solutions Terraform Mesos
+# Terraform AWS Mesos
 
-## How to set up a Mesos cluster on the Google Cloud using Terraform
+## Module to set up a Mesos cluster on AWS using Terraform
 
-### Install Terraform
-Follow the instructions on <https://www.terraform.io/intro/getting-started/install.html> to set up Terraform on your machine.
-
-### Get your Google Cloud JSON Key
-- Visit https://console.developers.google.com
-- Navigate to APIs & Auth -> Credentials -> Service Account -> Generate new JSON key
-- The file will be downloaded to your machine
-
-### Get Google Cloud SDK
-- Visit https://cloud.google.com/sdk/
-- Install the SDK and authenticate it with your Google Account
-- Once your keypair is created, use the path to the private key and the username in the next step as `gce_ssh_user` and `gce_ssh_private_key_file`
-
-### Prepare Terraform configuration file
+## Example Use
 
 Create a file `mesos.tf` containing something like this:
 
@@ -38,38 +25,11 @@ Create a file `mesos.tf` containing something like this:
 
 See the `variables.tf` file for the available variables and their defaults
 
-### Get the Terraform module
-Download the module
-
-```terraform get```
-
-### Create Terraform plan
-
-Create the plan and save it to a file. Use module-depth 1 to show the configuration of the resources inside the module.
-
-```
-terraform plan -out my.plan -module-depth=1
-```
-
-### Create the cluster
-
-Once you are satisfied with the plan, apply it.
-
-```
-terraform apply my.plan
-```
-
-### Visit the web interfaces
+## Visit the web interfaces
 When the cluster is set up, check the Google Developers Console for the addresses of the master nodes (or scroll back in the output of the apply step to retrieve them).
 - Go to <http://ipaddress:5050> for the Mesos Console 
 - and <http://ipaddress:8080> for the Marathon Console
 
-
-### Destroy the cluster
-When you're done, clean up the cluster with
-```
-terraform destroy
-```
 
 ## To do
 
@@ -79,7 +39,7 @@ terraform destroy
 - VPN configuration
 
 
-
+The installation and configuration used in this module is based on the code from ContainerSolutions, and their excellent howto: <http://container-solutions.com/2015/04/how-to-set-up-mesos-on-google-cloud-with-terraform/>
 The installation and configuration used in this module is based on this excellent howto: <https://www.digitalocean.com/community/tutorials/how-to-configure-a-production-ready-mesosphere-cluster-on-ubuntu-14-04>
 
   

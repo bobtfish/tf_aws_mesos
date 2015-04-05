@@ -2,9 +2,9 @@
 # path to the account file
 variable "account_file" {}
 # the username to connect with
-variable "gce_ssh_user" {}
+variable "ssh_user" {}
 # the private key of the user
-variable "gce_ssh_private_key_file" {}
+variable "ssh_private_key_file" {}
 
 ## google project stuff
 # the google region where the cluster should be created
@@ -17,11 +17,11 @@ variable "project" {}
 variable "image" {
     default = "ubuntu-os-cloud/ubuntu-1404-trusty-v20150128"
 }
-variable "master_machine_type" {
-    default = "n1-standard-2"
+variable "master_instance_type" {
+    default = "m3.large"
 }
-variable "slave_machine_type" {
-    default = "n1-standard-4"
+variable "slave_instance_type" {
+    default = "m3.medium"
 }
 
 ## network stuff
@@ -36,7 +36,6 @@ variable "domain" {}
 
 ## mesos stuff
 # the name of the cluster
-variable "name" {}
 # number of master nodes to install
 variable "masters" {
     default = "1"

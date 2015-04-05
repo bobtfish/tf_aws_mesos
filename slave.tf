@@ -1,32 +1,17 @@
-resource "google_compute_instance" "mesos-slave" {
+resource "aws_instance" "mesos_slave" {
     count = "${var.slaves}"
-    name = "${var.name}-mesos-slave-${count.index}"
-    machine_type = "${var.slave_machine_type}"
-    zone = "${var.zone}"
-    tags = ["mesos-slave","http","https","ssh"]
-
-    disk {
-      image = "${var.image}"
-      type = "pd-ssd"
-    }
-    
-    metadata {
-      mastercount = "${var.masters}"
-      clustername = "${var.name}"
-      domain = "${var.domain}"
-    }
-
-    network_interface {
-      network = "${google_compute_network.mesos-net.name}"
-      access_config {
-        //Ephemeral IP
-      }
+    ami = "ami-1234"
+    instance_type = "${var.slave_instance_type}"
+    security_groups = [ "${aws_security_group.mesos_http.id}", "${aws_security_group.mesos_https.id}", "${aws_security_group.mesos_ssh.id}", "${aws_security_group.mesos_internal.id}" ]
+    subnet_id = "${var.subnet_id}"
+    tags {
+      Name = "mesos-slave-${count.index}"
     }
 
     # define default connection for remote provisioners
     connection {
-      user = "${var.gce_ssh_user}"
-      key_file = "${var.gce_ssh_private_key_file}"
+      user = "${var.ssh_user}"
+      key_file = "${var.ssh_private_key_file}"
     }
 
     # install mesos, haproxy and docker

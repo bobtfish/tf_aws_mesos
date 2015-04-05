@@ -1,71 +1,82 @@
-resource "google_compute_firewall" "mesos-internal" {
-    name = "${var.name}-mesos-internal"
-    network = "${google_compute_network.mesos-net.name}"
+resource "aws_security_group" "mesos_internal" {
+  name = "mesos_internal_allow_all"
+  description = "Allow all inbound traffic"
+    ingress {
+      from_port = 0
+      to_port = 65535
+      protocol = "-1"
+      security_groups = [ "${self.id}" ]
+  }
 
-    allow {
-        protocol = "tcp"
-        ports = ["1-65535"]
-    }
-    allow {
-        protocol = "udp"
-        ports = ["1-65535"]
-    }
-    allow {
-        protocol = "icmp"
-    }
+  egress {
+      from_port = 0
+      to_port = 65535
+      protocol = "-1"
+      security_groups = [ "${self.id}" ]
+  }
 
-    source_ranges = ["${google_compute_network.mesos-net.ipv4_range}","${var.localaddress}"]
-
+  tags {
+    Name = "mesos_internal_allow_all"
+  }
 }
 
-resource "google_compute_firewall" "mesos-http" {
-    name = "${var.name}-mesos-http"
-    network = "${google_compute_network.mesos-net.name}"
+resource "aws_security_group" "mesos_http" {
+  name = "mesos_http"
+  description = "Allow all inbound HTTP traffic"
+  ingress {
+      from_port = 80
+      to_port = 80
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+  }
 
-    allow {
-        protocol = "tcp"
-        ports = ["80"]
-    }
-
-    target_tags = ["http"]
-    source_ranges = ["0.0.0.0/0"]
+  tags {
+    Name = "mesos_http"
+  }
 }
 
-resource "google_compute_firewall" "mesos-https" {
-    name = "${var.name}-mesos-https"
-    network = "${google_compute_network.mesos-net.name}"
+resource "aws_security_group" "mesos_https" {
+  name = "mesos_https"
+  description = "Allow all inbound HTTPS traffic"
+  ingress {
+      from_port = 443
+      to_port = 443
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+  }
 
-    allow {
-        protocol = "tcp"
-        ports = ["443"]
-    }
-
-    target_tags = ["http"]
-    source_ranges = ["0.0.0.0/0"]
+  tags {
+    Name = "mesos_https"
+  }
 }
 
-resource "google_compute_firewall" "mesos-ssh" {
-    name = "${var.name}-mesos-ssh"
-    network = "${google_compute_network.mesos-net.name}"
+resource "aws_security_group" "mesos_ssh" {
+  name = "mesos_ssh"
+  description = "Allow all inbound SSH traffic"
+  ingress {
+      from_port = 22
+      to_port = 22
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+  }
 
-    allow {
-        protocol = "tcp"
-        ports = ["22"]
-    }
-
-    target_tags = ["ssh"]
-    source_ranges = ["0.0.0.0/0"]
+  tags {
+    Name = "mesos_ssh"
+  }
 }
 
-resource "google_compute_firewall" "vpn" {
-    name = "${var.name}-vpn"
-    network = "${google_compute_network.mesos-net.name}"
+resource "aws_security_group" "vpn" {
+  name = "mesos_ssh"
+  description = "Allow all inbound VPN traffic"
+  ingress {
+      from_port = 1194
+      to_port = 1194
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+  }
 
-    allow {
-        protocol = "udp"
-        ports = ["1194"]
-    }
-
-    target_tags = ["vpn"]
-    source_ranges = ["0.0.0.0/0"]
+  tags {
+    Name = "vpn"
+  }
 }
+
