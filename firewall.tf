@@ -40,6 +40,7 @@ resource "aws_security_group" "mesos_http" {
 resource "aws_security_group" "mesos_https" {
   name = "mesos_https"
   description = "Allow all inbound HTTPS traffic"
+  vpc_id = "${var.vpc_id}"
   ingress {
       from_port = 443
       to_port = 443
