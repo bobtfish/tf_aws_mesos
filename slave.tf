@@ -32,12 +32,4 @@ resource "aws_instance" "mesos_slave" {
       key_file = "${var.ssh_private_key_file}"
     }
     user_data = "${replace(file(\"${path.module}/slave.conf\"), \"__CLUSTER_SIZE__\", \"${var.masters}\")}"
-
-    # install mesos, haproxy and docker
-    provisioner "remote-exec" {
-      scripts = [
-        "${path.module}/scripts/wait_for_cloudinit.sh",
-        "${path.module}/scripts/haproxy_marathon_bridge_install.sh",
-      ]
-    }
 }

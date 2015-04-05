@@ -33,13 +33,5 @@ resource "aws_instance" "mesos_master" {
     }
  
     user_data = "${replace(replace(file(\"${path.module}/master.conf\"), \"__MYID__\", \"${count.index+1}\"), \"__CLUSTER_SIZE__\", \"${var.masters}\")}"
-
-    # install mesos, haproxy, docker, openvpn, and configure the node
-    provisioner "remote-exec" {
-      scripts = [
-        "${path.module}/scripts/wait_for_cloudinit.sh",
-        "${path.module}/scripts/haproxy_marathon_bridge_install.sh",
-      ]
-    }
 }
 
