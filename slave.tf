@@ -23,6 +23,7 @@ resource "aws_instance" "mesos_slave" {
     key_name = "${var.admin_key_name}"
     tags {
       Name = "mesos-slave-${count.index}"
+      role = "mesos-slave"
     }
 
     # define default connection for remote provisioners
