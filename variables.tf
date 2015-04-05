@@ -9,10 +9,6 @@ variable "admin_key_name" {}
 ## google project stuff
 # the google region where the cluster should be created
 variable "region" {}
-# the google zone where the cluster should be created
-variable "zone" {}
-# the name of the google project
-variable "project" {}
 # image to use for installation
 variable "image" {
     default = "ubuntu-os-cloud/ubuntu-1404-trusty-v20150128"
