@@ -23,12 +23,7 @@ variable "master_instance_type" {
 variable "slave_instance_type" {
     default = "m3.medium"
 }
-
-## network stuff
-# the address of the subnet in CIDR
-variable "network" {
-    default = "10.20.30.0/24"
-}
+variable "subnet_id" {}
 # private address for unlimited access to the cluster, in CIDR
 variable "localaddress" {}
 # domain name used by haproxy
