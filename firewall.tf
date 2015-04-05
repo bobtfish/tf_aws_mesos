@@ -1,7 +1,8 @@
 resource "aws_security_group" "mesos_internal" {
   name = "mesos_internal_allow_all"
   description = "Allow all inbound traffic"
-    ingress {
+  vpc_id = "${var.vpc_id}"
+  ingress {
       from_port = 0
       to_port = 65535
       protocol = "-1"
@@ -23,6 +24,7 @@ resource "aws_security_group" "mesos_internal" {
 resource "aws_security_group" "mesos_http" {
   name = "mesos_http"
   description = "Allow all inbound HTTP traffic"
+  vpc_id = "${var.vpc_id}"
   ingress {
       from_port = 80
       to_port = 80
@@ -53,6 +55,7 @@ resource "aws_security_group" "mesos_https" {
 resource "aws_security_group" "mesos_ssh" {
   name = "mesos_ssh"
   description = "Allow all inbound SSH traffic"
+  vpc_id = "${var.vpc_id}"
   ingress {
       from_port = 22
       to_port = 22
@@ -68,6 +71,7 @@ resource "aws_security_group" "mesos_ssh" {
 resource "aws_security_group" "vpn" {
   name = "mesos_ssh"
   description = "Allow all inbound VPN traffic"
+  vpc_id = "${var.vpc_id}"
   ingress {
       from_port = 1194
       to_port = 1194

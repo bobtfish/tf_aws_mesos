@@ -1,8 +1,7 @@
 ## credential stuff
 variable "admin_key_name" {}
-## google project stuff
-# the google region where the cluster should be created
 variable "region" {}
+variable "vpc_id" {}
 variable "master_instance_type" {
     default = "m3.large"
 }
