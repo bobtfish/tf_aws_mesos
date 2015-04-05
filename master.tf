@@ -22,7 +22,7 @@ resource "aws_instance" "mesos_master" {
     subnet_id = "${var.subnet_id}"
     key_name = "${var.admin_key_name}"
     tags {
-      Name = "mesos-master-${count.index}"
+      Name = "mesos-master-${count.index+1}"
       role = "mesos-master"
     }
     
