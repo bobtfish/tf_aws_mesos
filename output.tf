@@ -1,4 +1,4 @@
-output "address" {
-  value = "${aws_instance.mesos_master.0.private_ip}"
+output "master_public_ip" {
+  value = "${aws_instance.mesos_master.0.public_ip}"
 }
 
