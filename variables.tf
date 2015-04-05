@@ -1,5 +1,7 @@
 ## credential stuff
 variable "admin_key_name" {}
+variable "aws_key_location" {
+}
 variable "region" {}
 variable "vpc_id" {}
 variable "master_instance_type" {
