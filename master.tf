@@ -2,7 +2,7 @@ resource "aws_instance" "mesos_master" {
     count = "${var.masters}"
     ami = "ami-1234"
     instance_type = "${var.master_instance_type}"
-    security_groups = [ "${aws_security_group.mesos_http.id}", "${aws_security_group.mesos_https.id}", "${aws_security_group.mesos_ssh.id}", "${aws_security_group.mesos_vpn.id}", "${aws_security_group.mesos_internal.id}" ]
+    security_groups = [ "${aws_security_group.mesos_http.id}", "${aws_security_group.mesos_https.id}", "${aws_security_group.mesos_ssh.id}", "${aws_security_group.vpn.id}", "${aws_security_group.mesos_internal.id}" ]
     subnet_id = "${var.subnet_id}"
     tags {
       Name = "mesos-master-${count.index}"
