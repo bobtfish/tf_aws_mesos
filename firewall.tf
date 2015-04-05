@@ -69,7 +69,7 @@ resource "aws_security_group" "mesos_ssh" {
 }
 
 resource "aws_security_group" "vpn" {
-  name = "mesos_ssh"
+  name = "vpn"
   description = "Allow all inbound VPN traffic"
   vpc_id = "${var.vpc_id}"
   ingress {
