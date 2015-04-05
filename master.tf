@@ -25,7 +25,7 @@ resource "aws_instance" "mesos_master" {
     
     # define default connection for remote provisioners
     connection {
-      user = "${var.ssh_user}"
+      user = "ubuntu"
       key_file = "${var.ssh_private_key_file}"
     }
     
