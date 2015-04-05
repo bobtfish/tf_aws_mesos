@@ -4,6 +4,7 @@ resource "aws_instance" "mesos_master" {
     instance_type = "${var.master_instance_type}"
     security_groups = [ "${aws_security_group.mesos_http.id}", "${aws_security_group.mesos_https.id}", "${aws_security_group.mesos_ssh.id}", "${aws_security_group.vpn.id}", "${aws_security_group.mesos_internal.id}" ]
     subnet_id = "${var.subnet_id}"
+    key_name = "${var.admin_key_name}"
     tags {
       Name = "mesos-master-${count.index}"
     }

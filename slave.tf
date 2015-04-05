@@ -4,6 +4,7 @@ resource "aws_instance" "mesos_slave" {
     instance_type = "${var.slave_instance_type}"
     security_groups = [ "${aws_security_group.mesos_http.id}", "${aws_security_group.mesos_https.id}", "${aws_security_group.mesos_ssh.id}", "${aws_security_group.mesos_internal.id}" ]
     subnet_id = "${var.subnet_id}"
+    key_name = "${var.admin_key_name}"
     tags {
       Name = "mesos-slave-${count.index}"
     }

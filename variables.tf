@@ -5,7 +5,7 @@ variable "account_file" {}
 variable "ssh_user" {}
 # the private key of the user
 variable "ssh_private_key_file" {}
-
+variable "admin_key_name" {}
 ## google project stuff
 # the google region where the cluster should be created
 variable "region" {}
