@@ -29,13 +29,13 @@ resource "aws_instance" "mesos_master" {
       user = "ubuntu"
       key_file = "${var.ssh_private_key_file}"
     }
-    
+ 
+    user_data = "${file(\"master.conf\")}"
+
     # install mesos, haproxy, docker, openvpn, and configure the node
     provisioner "remote-exec" {
       scripts = [
-        "${path.module}/scripts/master_install.sh",
-        "${path.module}/scripts/docker_install.sh",
-        "${path.module}/scripts/openvpn_install.sh",
+        "${path.module}/scripts/wait_for_cloudinit.sh",
         "${path.module}/scripts/haproxy_marathon_bridge_install.sh",
         "${path.module}/scripts/common_config.sh",
         "${path.module}/scripts/master_config.sh"
