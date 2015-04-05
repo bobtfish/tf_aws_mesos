@@ -36,7 +36,7 @@ resource "aws_instance" "mesos_slave" {
     # install mesos, haproxy and docker
     provisioner "remote-exec" {
       scripts = [
-        "${path.module}/scripts/slave_install.sh",
+        "${path.module}/scripts/wait_for_cloudinit.sh",
         "${path.module}/scripts/haproxy_marathon_bridge_install.sh",
         "${path.module}/scripts/common_config.sh",
         "${path.module}/scripts/slave_config.sh"
