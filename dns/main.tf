@@ -18,7 +18,7 @@ resource "aws_route53_record" "mesos" {
     records = ["${split(\",\", var.adminlb_public_ips)}"]
 }
 
-resource "aws_route53_record" "mesos" {
+resource "aws_route53_record" "marathon" {
     zone_id = "${aws_route53_zone.mesos.zone_id}"
     name = "marathon.admin.${var.domain}"
     type = "A"
