@@ -1,7 +1,7 @@
 # Create a new load balancer
 resource "aws_elb" "mesos" {
   name = "mesos-elb"
-  availability_zones = ["eu-central-1a", "eu-central-1-b"]
+  availability_zones = ["eu-central-1a", "eu-central-1b"]
 
   listener {
     instance_port = 80
