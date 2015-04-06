@@ -4,6 +4,7 @@ variable "admin_key_name" {}
 variable "ssh_private_key_file" {}
 variable "region" {}
 variable "vpc_id" {}
+variable "admin_iprange" {}
 variable "adminlb_instance_type" {
     default = "t2.medium"
 }
