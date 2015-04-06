@@ -18,7 +18,6 @@ variable "count" {
     default = "3"
 }
 variable "security_group_http" {}
-variable "security_group_https" {}
 variable "security_group_ssh" {}
 variable "security_group_internal" {}
 
