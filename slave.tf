@@ -11,5 +11,6 @@ module "mesos_slave" {
     region = "${var.region}"
     vpc_id = "${var.vpc_id}"
     subnet_id = "${var.subnet_id}"
+    ssh_private_key_file = "${var.ssh_private_key_file}"
 }
 
