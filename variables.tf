@@ -11,7 +11,8 @@ variable "discovery_instance_profile" {}
 variable "slave_instance_type" {
     default = "m3.medium"
 }
-variable "subnet_id" {}
+variable "instance_subnet_id" {}
+variable "elb_subnet_id" {}
 # domain name used by haproxy
 variable "domain" {}
 
