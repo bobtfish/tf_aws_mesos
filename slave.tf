@@ -8,4 +8,5 @@ module "mesos_slave" {
     subnet_id = "${var.subnet_id}"
     admin_key_name = "${var.admin_key_name}"
     zookeeper_cluster_size = "${var.masters}"
+    region = "${var.region}"
 }
