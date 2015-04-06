@@ -8,7 +8,6 @@ module "mesos_master" {
     instance_type = "${var.master_instance_type}"
     subnet_ids = "${var.private_subnet_ids}"
     admin_key_name = "${var.admin_key_name}"
-    domain = "${var.domain}"
     region = "${var.region}"
     vpc_id = "${var.vpc_id}"
     ssh_private_key_file = "${var.ssh_private_key_file}"
