@@ -7,7 +7,7 @@ module "adminlb" {
     discovery_instance_profile = "${var.discovery_instance_profile}"
     count = "${var.adminlbs}"
     instance_type = "${var.adminlb_instance_type}"
-    subnet_id = "${var.private_subnet_id}"
+    subnet_id = "${var.public_subnet_ids}"
     admin_key_name = "${var.admin_key_name}"
     domain = "${var.domain}"
     region = "${var.region}"
