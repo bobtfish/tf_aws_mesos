@@ -1,6 +1,6 @@
 module "dns" {
     source = "dns/"
     domain = "${var.domain}"
-    server_ips = "${module.mesos_master.public_ips}"
+    elb_name = "${aws_elb.mesos.dns_name}"
 }
 

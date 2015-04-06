@@ -5,8 +5,8 @@ resource "aws_route53_zone" "mesos" {
 resource "aws_route53_record" "star" {
    zone_id = "${aws_route53_zone.mesos.zone_id}"
    name = "*.${var.domain}"
-   type = "A"
+   type = "CNAME"
    ttl = "300"
-   records = ["${split(\",\", var.server_ips)}"]
+   records = ["${var.elb_name}"]
 }
 

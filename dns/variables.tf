@@ -1,3 +1,3 @@
-variable "server_ips" {}
+variable "elb_name" {}
 variable "domain" {}
 
