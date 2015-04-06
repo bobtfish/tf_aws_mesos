@@ -18,7 +18,7 @@ resource "aws_instance" "mesos_master" {
     count = "${var.count}"
     ami = "${module.ami.ami_id}"
     instance_type = "${var.instance_type}"
-    security_groups = [ "${var.security_group_http}", "${var.security_group_https}", "${var.security_group_ssh}" "${var.security_group_internal}" ]
+    security_groups = [ "${var.security_group_http}", "${var.security_group_https}", "${var.security_group_ssh}", "${var.security_group_internal}" ]
     subnet_id = "${var.subnet_id}"
     key_name = "${var.admin_key_name}"
     tags {
