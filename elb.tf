@@ -22,11 +22,11 @@ resource "aws_elb" "mesos" {
   cross_zone_load_balancing = true
 }
 
-output "dns_name" {
+output "mesos_elb_dns_name" {
   value = "${aws_elb.mesos.dns_name}"
 }
 
-output "id" {
+output "mesos_elb_id" {
   value = "${aws_elb.mesos.id}"
 }
 
