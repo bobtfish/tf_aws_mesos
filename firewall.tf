@@ -62,19 +62,3 @@ resource "aws_security_group" "mesos_ssh" {
   }
 }
 
-resource "aws_security_group" "vpn" {
-  name = "vpn"
-  description = "Allow all inbound VPN traffic"
-  vpc_id = "${var.vpc_id}"
-  ingress {
-      from_port = 1194
-      to_port = 1194
-      protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags {
-    Name = "vpn"
-  }
-}
-
