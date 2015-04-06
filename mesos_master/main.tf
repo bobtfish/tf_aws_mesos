@@ -13,7 +13,7 @@ module "ami" {
 }
 
 resource "aws_instance" "mesos_master" {
-    associate_public_ip_address = true
+    associate_public_ip_address = false
     iam_instance_profile = "${var.discovery_instance_profile}"
     count = "${var.count}"
     ami = "${module.ami.ami_id}"
