@@ -1,6 +1,6 @@
 module "elb" {
     source = "elb/"
-    instance_ids = ["${split(\",\", module.mesos_master.instance_ids)}"]
+    instance_ids = ["${module.mesos_master.instance_ids}"]
 }
 
 output "mesos_elb_dns_name" {

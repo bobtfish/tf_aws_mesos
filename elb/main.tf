@@ -19,7 +19,7 @@ resource "aws_elb" "mesos" {
     interval = 30
   }
 
-  instances = ["${var.instance_ids}"]
+  instances = ["${split(\",\", var.instance_ids)}"]
   cross_zone_load_balancing = true
 }
 
