@@ -1,4 +1,4 @@
-output "master_public_ip" {
-  value = "${module.mesos_master.public_ip}"
+output "master_public_ips" {
+  value = "${module.mesos_master.public_ips}"
 }
 
