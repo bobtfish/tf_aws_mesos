@@ -1,6 +1,6 @@
 
 module "mesos_master" {
-    source = "${path.module}/mesos_master"
+    source = "mesos_master"
     security_group_http = "${aws_security_group.mesos_http.id}"
     security_group_https = "${aws_security_group.mesos_https.id}"
     security_group_ssh = "${aws_security_group.mesos_ssh.id}"
