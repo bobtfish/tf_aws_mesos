@@ -7,7 +7,7 @@ module "lb" {
     discovery_instance_profile = "${var.discovery_instance_profile}"
     count = "${var.lbs}"
     instance_type = "${var.lb_instance_type}"
-    subnet_id = "${var.private_subnet_ids}"
+    subnet_ids = "${var.private_subnet_ids}"
     admin_key_name = "${var.admin_key_name}"
     domain = "${var.domain}"
     region = "${var.region}"
