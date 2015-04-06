@@ -5,12 +5,11 @@ module "mesos_slave" {
     instance_type = "${var.slave_instance_type}"
     security_group_ssh = "${aws_security_group.mesos_ssh.id}"
     security_group_internal = "${aws_security_group.mesos_internal.id}"
-    subnet_id = "${var.private_subnet_ids}"
+    subnet_ids = "${var.private_subnet_ids}"
     admin_key_name = "${var.admin_key_name}"
     zookeeper_cluster_size = "${var.masters}"
     region = "${var.region}"
     vpc_id = "${var.vpc_id}"
-    subnet_id = "${var.subnet_id}"
     ssh_private_key_file = "${var.ssh_private_key_file}"
 }
 

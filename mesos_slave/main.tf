@@ -19,7 +19,7 @@ resource "aws_instance" "mesos_slave" {
     ami = "${module.ami.ami_id}"
     instance_type = "${var.instance_type}"
     security_groups = [ "${var.security_group_ssh}", "${var.security_group_internal}" ]
-    subnet_id = "${var.subnet_id}"
+    subnet_id = "${var.subnet_ids}"
     key_name = "${var.admin_key_name}"
     # FIXME - disk size here!
     tags {
