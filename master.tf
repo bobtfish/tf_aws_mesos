@@ -8,7 +8,7 @@ module "mesos_master" {
     discovery_instance_profile = "${var.discovery_instance_profile}"
     count = "${var.masters}"
     instance_type = "${var.master_instance_type}"
-    subnet_id = "${var.private_instance_subnet_id}"
+    subnet_id = "${var.private_subnet_id}"
     admin_key_name = "${var.admin_key_name}"
     domain = "${var.domain}"
     region = "${var.region}"
