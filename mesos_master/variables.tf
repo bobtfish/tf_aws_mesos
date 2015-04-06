@@ -7,9 +7,7 @@ variable "instance_type" {
     default = "m3.large"
 }
 variable "discovery_instance_profile" {}
-variable "subnet_id" {}
-# domain name used by nginx 
-variable "domain" {}
+variable "subnet_ids" {}
 
 ## mesos stuff
 # the name of the cluster
@@ -17,7 +15,6 @@ variable "domain" {}
 variable "count" {
     default = "3"
 }
-variable "security_group_http" {}
 variable "security_group_ssh" {}
 variable "security_group_internal" {}
 
