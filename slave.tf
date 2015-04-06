@@ -1,5 +1,5 @@
 module "mesos_slave" {
-    source = "mesos_slave}"
+    source = "mesos_slave"
     discovery_instance_profile = "${var.discovery_instance_profile}"
     count = "${var.slaves}"
     instance_type = "${var.slave_instance_type}"
