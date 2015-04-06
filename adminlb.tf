@@ -1,6 +1,6 @@
 
-module "lb" {
-    source = "lb"
+module "adminlb" {
+    source = "adminlb"
     security_group_http = "${aws_security_group.mesos_http.id}"
     security_group_ssh = "${aws_security_group.mesos_ssh.id}"
     security_group_internal = "${aws_security_group.mesos_internal.id}"
