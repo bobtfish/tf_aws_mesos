@@ -1,9 +1,11 @@
 variable "instance_ids" {}
+variable "subnet_id" {}
 
 resource "aws_elb" "mesos" {
   name = "mesos-elb"
-  availability_zones = ["eu-central-1a", "eu-central-1b"]
-
+  internal = false
+  availability_zones = ["eu-central-1a"]
+  subnets = [ "${var.subnet_id}" ]
   listener {
     instance_port = 80
     instance_protocol = "http"
