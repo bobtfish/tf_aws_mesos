@@ -1,7 +1,8 @@
 module "elb" {
     source = "elb/"
     instance_ids = "${module.mesos_master.instance_ids}"
-    subnet_id = "${var.elb_subnet_id}"
+    subnet_ids = "${var.elb_subnet_id}"
+    security_group_ids = "${aws_security_group.mesos_http.id}"
 }
 
 output "mesos_elb_dns_name" {
