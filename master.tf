@@ -12,5 +12,7 @@ module "mesos_master" {
     admin_key_name = "${var.admin_key_name}"
     domain = "${var.domain}"
     region = "${var.region}"
+    vpc_id = "${var.vpc_id}"
+    subnet_id = "${var.subnet_id}"
 }
 
