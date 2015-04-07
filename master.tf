@@ -8,6 +8,5 @@ module "mesos_master" {
     instance_type = "${var.master_instance_type}"
     admin_key_name = "${var.admin_key_name}"
     region = "${var.region}"
-    vpc_id = "${var.vpc_id}"
 }
 

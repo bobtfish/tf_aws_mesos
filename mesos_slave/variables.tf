@@ -4,7 +4,6 @@ variable "security_group_ssh" {}
 variable "zookeeper_cluster_size" {}
 variable "admin_key_name" {}
 variable "region" {}
-variable "vpc_id" {}
 variable "discovery_instance_profile" {}
 variable "instance_type" {
     default = "m3.medium"

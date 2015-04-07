@@ -10,6 +10,5 @@ module "lb" {
     admin_key_name = "${var.admin_key_name}"
     domain = "${var.domain}"
     region = "${var.region}"
-    vpc_id = "${var.vpc_id}"
 }
 

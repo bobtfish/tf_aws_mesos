@@ -1,7 +1,6 @@
 ## credential stuff
 variable "admin_key_name" {}
 variable "region" {}
-variable "vpc_id" {}
 variable "instance_type" {
     default = "t2.micro"
 }
