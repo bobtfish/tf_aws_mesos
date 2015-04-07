@@ -9,6 +9,7 @@ module "mesos_master" {
     instance_type = "${var.master_instance_type}"
     admin_key_name = "${var.admin_key_name}"
     region = "${var.region}"
+    domain = "${var.domain}"
     availability_zones = "${var.availability_zones}"
 }
 

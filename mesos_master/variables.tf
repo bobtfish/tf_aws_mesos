@@ -22,4 +22,5 @@ variable "volume_size" {
     default = "32"
 }
 variable "availability_zones" {}
+variable "domain" {}
 
