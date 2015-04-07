@@ -6,39 +6,44 @@
 
 Create a file `mesos.tf` containing something like this:
 
-
     module "mesos" {
-        source                      = "github.com/ContainerSolutions/terraform-mesos"
-        account_file                = "/path/to/your.key.json"
-        project                     = "your google project"
-        region                      = "europe-west1"
-        zone                        = "europe-west1-d"
-        gce_ssh_user                = "user"
-        name                        = "mymesoscluster"
-        masters                     = "3"
+        source                      = "github.com/bobtfish/tf_aws_mesos"
         slaves                      = "5"
-        network                     = "10.20.30.0/24"
-        localaddress                = "92.111.228.8/32"
-        domain                      = "example.com"
+        region = "${var.region}"
+        admin_iprange = "${var.admin_iprange}"
+        admin_key_name = "${aws_key_pair.admin.key_name}"
+        private_subnet_ids = "${module.vpc.primary-az-ephemeralsubnet}"
+        public_subnet_ids = "${module.vpc.primary-az-frontsubnet}"
+        domain = "${var.domain}"
+        vpc_id = "${module.vpc.id}"
+        discovery_instance_profile = "describe-instances"
     }
 
 See the `variables.tf` file for the available variables and their defaults
 
 ## Visit the web interfaces
-When the cluster is set up, check the Google Developers Console for the addresses of the master nodes (or scroll back in the output of the apply step to retrieve them).
-- Go to <http://ipaddress:5050> for the Mesos Console 
-- and <http://ipaddress:8080> for the Marathon Console
 
+When the cluster is set up, you need to [retrieve the NS server records for your _domain_ from route53, and add delegations
+to this new subdomain from the domain you own (wherever that is managed):
+
+![Route53 console](https://raw.githubusercontent.com/bobtfish/terraform-example-mesos-cluster/master/route53.png)
+
+After which, you should be able to visit the admin interfaces at:
+
+  * mesos.admin.yoursubdomain
+  * marathon.admin.yoursubdomain
+
+You can launch marathon apps using the API (or the web interface) as per [this guide](https://www.digitalocean.com/community/tutorials/how-to-configure-a-production-ready-mesosphere-cluster-on-ubuntu-14-04), and each app's PORT will be made available via HTTP at the name of the app. For example the marathon app named _/www_ becomes _www.yoursubdomain_
 
 ## To do
 
-- How do I call a script from a module?
-- Currently no way to retrieve the ip address of the master nodes through Terraform. Use the Google Developers Console to retrieve the ip addresses. 
-- Cannot reach the log files of the Mesos slave nodes from the web interface on the leading master
-- VPN configuration
+  * Currently no way to retrieve the address of the DNS servers for the Route53 zone through Terraform. Use the Console to retrieve the addresses. 
+  * Cannot reach the log files of the Mesos slave nodes from the web interface
+  * Whilst the cluster we build is redundant, currently all the machines are allocated in a single availability zone.
+  * The machines have no configuration management (no puppet/chef), which means that making any changes to them (or getting any security updates) involves rebuilding the instances.
 
+## Credits
 
-The installation and configuration used in this module is based on the code from ContainerSolutions, and their excellent howto: <http://container-solutions.com/2015/04/how-to-set-up-mesos-on-google-cloud-with-terraform/>
-The installation and configuration used in this module is based on this excellent howto: <https://www.digitalocean.com/community/tutorials/how-to-configure-a-production-ready-mesosphere-cluster-on-ubuntu-14-04>
+This module is based on the code from ContainerSolutions, and their excellent GCE howto: <http://container-solutions.com/2015/04/how-to-set-up-mesos-on-google-cloud-with-terraform/>
 
   
