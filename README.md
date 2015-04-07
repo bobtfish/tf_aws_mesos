@@ -18,6 +18,7 @@ Create a file `mesos.tf` containing something like this:
         public_subnet_ids = "${module.vpc.primary-az-frontsubnet}"
         domain = "${var.domain}"
         vpc_id = "${module.vpc.id}"
+        vpc_iprange = "${module.vpc.iprange}"
         discovery_instance_profile = "describe-instances"
     }
 

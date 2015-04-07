@@ -1,7 +1,7 @@
 
 module "adminlb" {
     source = "adminlb"
-    security_group_http = "${aws_security_group.mesos_http.id}"
+    security_group_http = "${aws_security_group.mesos_http_admin.id}"
     security_group_ssh = "${aws_security_group.mesos_ssh.id}"
     security_group_internal = "${aws_security_group.mesos_internal.id}"
     discovery_instance_profile = "${var.discovery_instance_profile}"

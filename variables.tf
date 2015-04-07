@@ -4,6 +4,9 @@ variable "admin_key_name" {}
 variable "region" {}
 variable "vpc_id" {}
 variable "admin_iprange" {}
+variable "vpc_iprange" {
+  default = "0.0.0.0/0"
+}
 variable "adminlb_instance_type" {
     default = "t2.medium"
 }
@@ -19,24 +22,19 @@ variable "slave_instance_type" {
 }
 variable "private_subnet_ids" {}
 variable "public_subnet_ids" {}
-# domain name used by haproxy
 variable "domain" {}
-
-## mesos stuff
-# the name of the cluster
-# number of master nodes to install
 variable "adminlbs" {
     default = "1"
 }
 variable "lbs" {
-    default = "1"
+    default = "2"
 }
 variable "masters" {
     default = "3"
 }
 # number of slaves to install
 variable "slaves" {
-    default = "3"
+    default = "5"
 }
 
 
