@@ -11,5 +11,6 @@ module "lb" {
     admin_key_name = "${var.admin_key_name}"
     domain = "${var.domain}"
     region = "${var.region}"
+    load_balancer = "${module.elb.id}" 
 }
 

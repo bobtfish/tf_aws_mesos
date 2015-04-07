@@ -13,4 +13,4 @@ variable "count" {
 variable "security_group_http" {}
 variable "security_group_ssh" {}
 variable "security_group_internal" {}
-
+variable "load_balancer" {}

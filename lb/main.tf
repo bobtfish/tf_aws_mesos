@@ -23,7 +23,7 @@ resource "aws_autoscaling_group" "mesos_lb" {
   desired_capacity = "${var.count}"
   force_delete = true
   launch_configuration = "${aws_launch_configuration.lb.name}"
-
+  load_balancers = [ "${var.load_balancer}" ]
   tag {
     key = "role"
     value = "lb"
