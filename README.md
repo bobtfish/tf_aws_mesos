@@ -14,7 +14,6 @@ Create a file `mesos.tf` containing something like this:
         region                      = "europe-west1"
         zone                        = "europe-west1-d"
         gce_ssh_user                = "user"
-        gce_ssh_private_key_file    = "/path/to/private.key"
         name                        = "mymesoscluster"
         masters                     = "3"
         slaves                      = "5"

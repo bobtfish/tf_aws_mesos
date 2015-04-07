@@ -1,6 +1,5 @@
 ## credential stuff
 variable "admin_key_name" {}
-variable "ssh_private_key_file" {}
 variable "region" {}
 variable "vpc_id" {}
 variable "instance_type" {

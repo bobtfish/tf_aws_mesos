@@ -3,7 +3,6 @@ variable "security_group_internal" {}
 variable "security_group_ssh" {}
 variable "zookeeper_cluster_size" {}
 variable "admin_key_name" {}
-variable "ssh_private_key_file" {}
 variable "region" {}
 variable "vpc_id" {}
 variable "discovery_instance_profile" {}
