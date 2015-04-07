@@ -5,7 +5,7 @@ variable "instance_type" {
     default = "t2.micro"
 }
 variable "discovery_instance_profile" {}
-variable "subnet_id" {}
+variable "subnet_ids" {}
 # domain name used by nginx 
 variable "domain" {}
 
