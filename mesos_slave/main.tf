@@ -49,5 +49,8 @@ resource "aws_launch_configuration" "mesos_slave" {
         volume_type = "${var.volume_type}"
         volume_size = "${var.volume_size}"
     }
+    lifecycle {
+        create_before_destroy = true
+    }
 }
 
