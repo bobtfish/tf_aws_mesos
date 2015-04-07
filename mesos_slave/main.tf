@@ -12,19 +12,41 @@ module "ami" {
   storagetype = "ebs"
 }
 
-resource "aws_instance" "mesos_slave" {
-    associate_public_ip_address = false
-    iam_instance_profile = "${var.discovery_instance_profile}"
-    count = "${var.count}"
-    ami = "${module.ami.ami_id}"
+resource "aws_autoscaling_group" "bar" {
+  availability_zones = ["eu-central-1a"]
+  vpc_zone_identifier = [ "${var.subnet_ids}" ]
+  max_size = "${toint(var.count)+1}" 
+  min_size = "${var.count}"
+  health_check_grace_period = 300
+  health_check_type = "EC2"
+  desired_capacity = "${var.count}"
+  force_delete = true
+  launch_configuration = "${aws_launch_configuration.mesos_slave.name}"
+
+  tag {
+    key = "role"
+    value = "mesos-slave"
+    propagate_at_launch = true
+  }
+  tag {
+    key = "Name"
+    value = "mesos-slave"
+    propagate_at_launch = false
+  }
+}
+resource "aws_launch_configuration" "mesos_slave" {
+    name = "mesos_slave"
+    image_id = "${module.ami.ami_id}"
     instance_type = "${var.instance_type}"
+    user_data = "${replace(file(\"${path.module}/slave.conf\"), \"__ZOOKEEPER_CLUSTER_SIZE__\", \"${var.zookeeper_cluster_size}\")}"
     security_groups = [ "${var.security_group_ssh}", "${var.security_group_internal}" ]
     subnet_id = "${var.subnet_ids}"
     key_name = "${var.admin_key_name}"
-    # FIXME - disk size here!
-    tags {
-      Name = "mesos-slave-${count.index+1}"
-      role = "mesos-slave"
+    associate_public_ip_address = false
+    iam_instance_profile = "${var.discovery_instance_profile}"
+    root_block_device {
+        volume_type = "${var.volume_type}"
+        volume_size = "${var.volume_size}"
     }
-    user_data = "${replace(file(\"${path.module}/slave.conf\"), \"__ZOOKEEPER_CLUSTER_SIZE__\", \"${var.zookeeper_cluster_size}\")}"
 }
+
