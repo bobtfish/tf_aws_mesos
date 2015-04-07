@@ -2,6 +2,8 @@
 
 ## Module to set up a Mesos cluster on AWS using Terraform
 
+See my blog post for more detailed information / walkthrough: http://bobtfish.github.io/blog/2015/04/06/diy-scalable-paas-with-terraform/
+
 ## Example Use
 
 Create a file `mesos.tf` containing something like this:
@@ -20,6 +22,14 @@ Create a file `mesos.tf` containing something like this:
     }
 
 See the `variables.tf` file for the available variables and their defaults
+
+## Outputs
+
+  * mesos_elb_dns_name - The DNS name of the externally facing ELB
+  * mesos_elb_id - The AWS id of the externally facing ELB
+  * marathon_api - The full URI for the marathon web interface / API
+  * mesos_api - The full URI for the mesos web interface
+  * domain - The domain under which applications can be requested
 
 ## Visit the web interfaces
 

@@ -5,11 +5,3 @@ module "elb" {
     security_group_ids = "${aws_security_group.mesos_http.id}"
 }
 
-output "mesos_elb_dns_name" {
-  value = "${module.elb.dns_name}"
-}
-
-output "mesos_elb_id" {
-  value = "${module.elb.id}"
-}
-
