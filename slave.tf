@@ -9,6 +9,5 @@ module "mesos_slave" {
     zookeeper_cluster_size = "${var.masters}"
     region = "${var.region}"
     vpc_id = "${var.vpc_id}"
-    ssh_private_key_file = "${var.ssh_private_key_file}"
 }
 

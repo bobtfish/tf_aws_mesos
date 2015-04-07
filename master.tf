@@ -9,6 +9,5 @@ module "mesos_master" {
     admin_key_name = "${var.admin_key_name}"
     region = "${var.region}"
     vpc_id = "${var.vpc_id}"
-    ssh_private_key_file = "${var.ssh_private_key_file}"
 }
 
