@@ -1,7 +1,3 @@
-variable "instance_ids" {}
-variable "subnet_ids" {}
-variable "security_group_ids" {}
-
 resource "aws_elb" "mesos" {
   name = "mesos-elb"
   internal = false
