@@ -15,4 +15,10 @@ variable "count" {
 }
 variable "security_group_ssh" {}
 variable "security_group_internal" {}
+variable "volume_type" {
+    default = "gp2"
+}
+variable "volume_size" {
+    default = "32"
+}
 

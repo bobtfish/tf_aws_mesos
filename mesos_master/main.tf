@@ -12,19 +12,44 @@ module "ami" {
   storagetype = "ebs"
 }
 
-resource "aws_instance" "mesos_master" {
-    associate_public_ip_address = false
-    iam_instance_profile = "${var.discovery_instance_profile}"
-    count = "${var.count}"
-    ami = "${module.ami.ami_id}"
+resource "aws_autoscaling_group" "mesos_master" {
+  name = "mesos_master-${var.domain}"
+  availability_zones = ["${var.availability_zones}"]
+  vpc_zone_identifier = [ "${var.subnet_ids}" ]
+  max_size = "${toint(var.count)+1}" 
+  min_size = "${var.count}"
+  health_check_grace_period = 300
+  health_check_type = "EC2"
+  desired_capacity = "${var.count}"
+  force_delete = true
+  launch_configuration = "${aws_launch_configuration.mesos_master.name}"
+
+  tag {
+    key = "role"
+    value = "mesos-master"
+    propagate_at_launch = true
+  }
+  tag {
+    key = "Name"
+    value = "mesos-master"
+    propagate_at_launch = true
+  }
+}
+resource "aws_launch_configuration" "mesos_master" {
+    image_id = "${module.ami.ami_id}"
     instance_type = "${var.instance_type}"
+    user_data = "${replace(file(\"${path.module}/master.conf\"), \"__CLUSTER_SIZE__\", \"${var.count}\")}"
     security_groups = [ "${var.security_group_ssh}", "${var.security_group_internal}" ]
     subnet_id = "${var.subnet_ids}"
     key_name = "${var.admin_key_name}"
-    tags {
-      Name = "mesos-master-${count.index+1}"
-      role = "mesos-master"
+    associate_public_ip_address = false
+    iam_instance_profile = "${var.discovery_instance_profile}"
+    root_block_device {
+        volume_type = "${var.volume_type}"
+        volume_size = "${var.volume_size}"
     }
-    user_data = "${replace(file(\"${path.module}/master.conf\"), \"__CLUSTER_SIZE__\", \"${var.count}\")}"
+    lifecycle {
+        create_before_destroy = true
+    }
 }
 

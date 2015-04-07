@@ -36,7 +36,6 @@ resource "aws_autoscaling_group" "mesos_slave" {
   }
 }
 resource "aws_launch_configuration" "mesos_slave" {
-    name = "mesos_slave"
     image_id = "${module.ami.ami_id}"
     instance_type = "${var.instance_type}"
     user_data = "${replace(file(\"${path.module}/slave.conf\"), \"__ZOOKEEPER_CLUSTER_SIZE__\", \"${var.zookeeper_cluster_size}\")}"
