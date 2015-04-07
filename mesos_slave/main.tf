@@ -32,7 +32,7 @@ resource "aws_autoscaling_group" "mesos_slave" {
   tag {
     key = "Name"
     value = "mesos-slave"
-    propagate_at_launch = false
+    propagate_at_launch = true
   }
 }
 resource "aws_launch_configuration" "mesos_slave" {
