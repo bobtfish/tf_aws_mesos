@@ -10,6 +10,7 @@ variable "instance_type" {
 }
 variable "domain" {}
 variable "subnet_ids" {}
+variable "availability_zones" {}
 # number of slaves to install
 variable "count" {
     default = "3"

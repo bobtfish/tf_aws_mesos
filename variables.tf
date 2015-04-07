@@ -20,6 +20,7 @@ variable "discovery_instance_profile" {}
 variable "slave_instance_type" {
     default = "m3.medium"
 }
+variable "availability_zones" {}
 variable "private_subnet_ids" {}
 variable "public_subnet_ids" {}
 variable "domain" {}

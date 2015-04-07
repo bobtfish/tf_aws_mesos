@@ -14,7 +14,7 @@ module "ami" {
 
 resource "aws_autoscaling_group" "mesos_slave" {
   name = "mesos_slave-${var.domain}"
-  availability_zones = ["eu-central-1a"]
+  availability_zones = ["${var.availability_zones}"]
   vpc_zone_identifier = [ "${var.subnet_ids}" ]
   max_size = "${toint(var.count)+1}" 
   min_size = "${var.count}"
