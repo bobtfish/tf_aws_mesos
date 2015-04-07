@@ -21,4 +21,5 @@ variable "volume_type" {
 variable "volume_size" {
     default = "32"
 }
+variable "availability_zones" {}
 

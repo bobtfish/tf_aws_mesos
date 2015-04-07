@@ -12,5 +12,6 @@ module "lb" {
     domain = "${var.domain}"
     region = "${var.region}"
     load_balancer = "${module.elb.id}" 
+    availability_zones = "${var.availability_zones}"
 }
 
