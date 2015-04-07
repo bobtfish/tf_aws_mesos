@@ -12,7 +12,8 @@ module "ami" {
   storagetype = "ebs"
 }
 
-resource "aws_autoscaling_group" "bar" {
+resource "aws_autoscaling_group" "mesos_slave" {
+  name = "mesos_slave-${var.domain}"
   availability_zones = ["eu-central-1a"]
   vpc_zone_identifier = [ "${var.subnet_ids}" ]
   max_size = "${toint(var.count)+1}" 

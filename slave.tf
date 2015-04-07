@@ -9,5 +9,6 @@ module "mesos_slave" {
     admin_key_name = "${var.admin_key_name}"
     zookeeper_cluster_size = "${var.masters}"
     region = "${var.region}"
+    domain = "${var.domain}"
 }
 

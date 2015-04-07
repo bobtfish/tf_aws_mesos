@@ -8,6 +8,7 @@ variable "discovery_instance_profile" {}
 variable "instance_type" {
     default = "m3.medium"
 }
+variable "domain" {}
 variable "subnet_ids" {}
 # number of slaves to install
 variable "count" {
