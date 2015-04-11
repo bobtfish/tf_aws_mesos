@@ -1,15 +1,9 @@
-module "amitype" {
-    source = "github.com/bobtfish/terraform-amitype"
-    instance_type = "${var.instance_type}"
-}
-
 module "ami" {
-  source = "github.com/terraform-community-modules/tf_aws_ubuntu_ami"
+  source = "github.com/terraform-community-modules/tf_aws_ubuntu_ami/ebs"
   region = "${var.region}"
   distribution = "trusty"
-  architecture = "amd64"
   virttype = "${module.amitype.ami_type_prefer_hvm}"
-  storagetype = "ebs"
+  instance_type = "${var.instance_type}"
 }
 
 resource "aws_instance" "mesos_master" {
