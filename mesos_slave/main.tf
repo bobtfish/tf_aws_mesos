@@ -2,7 +2,6 @@ module "ami" {
   source = "github.com/terraform-community-modules/tf_aws_ubuntu_ami/ebs"
   region = "${var.region}"
   distribution = "trusty"
-  virttype = "${module.amitype.ami_type_prefer_hvm}"
   instance_type = "${var.instance_type}"
 }
 
