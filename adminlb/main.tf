@@ -12,7 +12,7 @@ resource "aws_instance" "adminlb" {
     ami = "${module.ami.ami_id}"
     instance_type = "${var.instance_type}"
     security_groups = [ "${var.security_group_http}", "${var.security_group_ssh}", "${var.security_group_internal}" ]
-    subnet_id = "${var.subnet_ids}"
+    subnet_id = "${element(split(\",\", var.subnet_ids), count.index)}"
     key_name = "${var.admin_key_name}"
     tags {
       Name = "adminlb-${count.index+1}"
