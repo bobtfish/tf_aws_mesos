@@ -8,17 +8,17 @@ variable "vpc_iprange" {
   default = "0.0.0.0/0"
 }
 variable "adminlb_instance_type" {
-    default = "t2.medium"
+    default = "t2.micro"
 }
 variable "lb_instance_type" {
-    default = "m3.large"
+    default = "t2.micro"
 }
 variable "master_instance_type" {
-    default = "m3.large"
+    default = "t2.micro"
 }
 variable "discovery_instance_profile" {}
 variable "slave_instance_type" {
-    default = "m3.medium"
+    default = "t2.micro"
 }
 variable "private_subnet_ids" {}
 variable "public_subnet_ids" {}
@@ -34,7 +34,7 @@ variable "masters" {
 }
 # number of slaves to install
 variable "slaves" {
-    default = "5"
+    default = "3"
 }
 
 
